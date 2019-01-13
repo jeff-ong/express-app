@@ -29,6 +29,9 @@ const spotify_util = async function(task,query){
                 });
             break;
         case 'recommendation':
+            /**TODO: 
+              * Allow user to get recommendation by providing seeds (artist, songs, genre)
+            **/ 
             return await spotify.request('https://api.spotify.com/v1/recommendations/available-genre-seeds')
                 .then(function(res) {
                     return res;
@@ -37,6 +40,10 @@ const spotify_util = async function(task,query){
                     return err;
                 });
             break;
+        /**TODO: 
+             * New case to allow user to get categorized playlist
+             * New case get user listening habits
+        **/ 
         default:
             return 'param task cannot be empty';
     }
