@@ -3,9 +3,11 @@ const router = express.Router();
 const spotify_util = require('../api/spotify');
 
 router.get('/api/spotify',function(req,res,next){
-  const task = req.query.task;
-  const query = req.query.query;
-  spotify_util(task,query).then((data)=>{
+  const req_arr = {};
+  req_arr.task = req.query.task;
+  req_arr.query = req.query.query;
+
+  spotify_util(req_arr).then((data)=>{
     res.json(data);
   });
 });

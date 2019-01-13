@@ -5,22 +5,22 @@ const spotify = new Spotify({
   secret: process.env.SPOTIFY_SECRET
 });
 
-const spotify_util = async function(task,query){
-
-    if (task === null ||
-        task === undefined ||
-        task === '') {
+const spotify_util = async function(req_obj){
+    
+    if (req_obj.task === null ||
+        req_obj.task === undefined ||
+        req_obj.task === '') {
         return 'Missing params: {query, task}';
     }
 
-    switch(task) {
+    switch(req_obj.task) {
         case 'search':
-            if (query === null ||
-                query === undefined ||
-                query === '') {
+            if (req_obj.query === null ||
+                req_obj.query === undefined ||
+                req_obj.query === '') {
                 return 'Please specify your seacrh in the \"query\" param.';
             }
-            return await spotify.search({ type: 'track', query: query })
+            return await spotify.search({ type: 'track', query: req_obj.query })
                 .then(function(res){
                     return res;
                 })
@@ -29,9 +29,6 @@ const spotify_util = async function(task,query){
                 });
             break;
         case 'recommendation':
-            /**TODO: 
-              * Allow user to get recommendation by providing seeds (artist, songs, genre)
-            **/ 
             return await spotify.request('https://api.spotify.com/v1/recommendations/available-genre-seeds')
                 .then(function(res) {
                     return res;
@@ -40,10 +37,16 @@ const spotify_util = async function(task,query){
                     return err;
                 });
             break;
-        /**TODO: 
-             * New case to allow user to get categorized playlist
-             * New case get user listening habits
-        **/ 
+        case 'categories':
+            const query_str = req_obj.query ? 'https://api.spotify.com/v1/browse/categories/'+req_obj.query: 'https://api.spotify.com/v1/browse/categories/';
+            return await spotify.request(query_str)
+                .then(function(res) {
+                    return res;
+                })
+                .catch(function(err) {
+                    return err;
+                });
+            break;
         default:
             return 'param task cannot be empty';
     }
