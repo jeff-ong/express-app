@@ -1,7 +1,5 @@
 require('dotenv').config();
-
 const Spotify = require('node-spotify-api');
- 
 const spotify = new Spotify({
   id: process.env.SPOTIFY_ID,
   secret: process.env.SPOTIFY_SECRET
