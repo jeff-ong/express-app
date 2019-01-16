@@ -1,14 +1,6 @@
 const presets = [
-    [
-      "@babel/env",
-      {
-          targets: {
-            esmodules: true
-          },
-          useBuiltIns: "entry",
-      },
-    ],
-    ["@babel/react",],
-  ];
-  
-  module.exports = { presets };
+  "@babel/preset-env",
+  "@babel/preset-react"
+];
+
+module.exports = { presets };

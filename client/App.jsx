@@ -1,11 +1,11 @@
 const React = require('react');
 const ReactDOM = require('react-dom');
-// const Song_List = require('./components/Song_List');
+const Song_List = require('./components/Song_List');
 
-// class App extends React.Component {
-//     render() {
-//         return <div>testing</div>;
-//     }
-// }
+class App extends React.Component {
+    render() {
+        return <Song_List></Song_List>;
+    }
+}
 
-ReactDOM.render(<h1>set up react</h1>,document.getElementById('app'));
+ReactDOM.render(<App />,document.getElementById('app'));

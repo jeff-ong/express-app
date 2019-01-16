@@ -4,7 +4,8 @@ const path = require('path');
 const webpack = require('webpack');
 
 const config = {
-  target: "node",
+  target: "web",
+  mode: "development",
   output: {
     path: path.join(__dirname, './public/javascripts/'),
     filename: 'app.bundle.js'
@@ -25,6 +26,5 @@ const config = {
 };
 
 config.entry = './client/App';
-config.mode = 'production';
 
 module.exports = config;
